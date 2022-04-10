@@ -19,10 +19,11 @@ public class ChromeDino {
 	}
 
 	void setup() {
+		frame.add(gp);
+		frame.setSize(WIDTH, HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		frame.setSize(WIDTH, HEIGHT);
-		frame.add(gp);
+		frame.addKeyListener(gp);
 
 	}
 }
