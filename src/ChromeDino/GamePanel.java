@@ -22,7 +22,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer frameDraw;
 	Font MenuFont = new Font("Arial", Font.PLAIN, 48);
 	Font SubtitleFont = new Font("Arial", Font.PLAIN, 32);
-
+Dino ds = new Dino(75, 150, 64, 64); 
 	public GamePanel() {
 		frameDraw = new Timer(1000 / 60, this);
 		frameDraw.start();
@@ -63,6 +63,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void drawGameState(Graphics g) {
 		g.setColor(Color.BLUE);
 		g.fillRect(0, 0, ChromeDino.WIDTH, ChromeDino.HEIGHT);
+		ds.draw(g);
 	}
 
 	void drawEndState(Graphics g) {
@@ -102,6 +103,18 @@ System.out.println("st");
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			if (currentState==GAME) {
 				System.out.println("Jump");
+				ds.jump();
+			}
+			else {
+					currentState=GAME;
+					System.out.println("3");
+			}
+			
+			}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			if (currentState==GAME) {
+				System.out.println("Duck");
+				ds.duck();
 			}
 		}
 	}
