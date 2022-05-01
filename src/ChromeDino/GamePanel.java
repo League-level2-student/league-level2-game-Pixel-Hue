@@ -22,7 +22,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer frameDraw;
 	Font MenuFont = new Font("Arial", Font.PLAIN, 48);
 	Font SubtitleFont = new Font("Arial", Font.PLAIN, 32);
-Dino ds = new Dino(75, 150, 64, 64); 
+	Dino ds = new Dino(64, 128, 64, 64);
+
 	public GamePanel() {
 		frameDraw = new Timer(1000 / 60, this);
 		frameDraw.start();
@@ -94,25 +95,27 @@ Dino ds = new Dino(75, 150, 64, 64);
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentState == END) {
-currentState=MENU;
-System.out.println("st");
+				currentState = MENU;
+				System.out.println("st");
 			} else {
 				currentState++;
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			if (currentState==GAME) {
-				System.out.println("Jump");
-				ds.jump();
-			}
-			else {
-					currentState=GAME;
-					System.out.println("3");
-			}
-			
-			}
+			currentState = GAME;
+			System.out.println("3");
+		}
+		if (e.getKeyCode() == KeyEvent.VK_W) {
+			System.out.println("up");
+			ds.up();
+		}
+		if (e.getKeyCode() == KeyEvent.VK_S) {
+			System.out.println("down");
+			ds.down();
+		}
+
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			if (currentState==GAME) {
+			if (currentState == GAME) {
 				System.out.println("Duck");
 				ds.duck();
 			}

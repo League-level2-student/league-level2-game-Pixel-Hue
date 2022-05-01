@@ -7,7 +7,7 @@ public class Dino extends GameObject{
 
 	Dino(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		speed = 50;
+		speed = 64;
 	}
 	public void draw(Graphics g) {
 		g.setColor(Color.BLACK);
@@ -15,8 +15,11 @@ public class Dino extends GameObject{
 		System.out.println(x);
 		System.out.println(width);
 	}
-	public void jump() {
+	public void up() {
 		y-=speed;
+	}
+	public void down() {
+		y+=speed;
 	}
 	public void duck() {
 		y+=speed;
