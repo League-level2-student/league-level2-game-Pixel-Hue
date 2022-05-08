@@ -23,6 +23,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font MenuFont = new Font("Arial", Font.PLAIN, 48);
 	Font SubtitleFont = new Font("Arial", Font.PLAIN, 32);
 	Dino ds = new Dino(64, 128, 64, 64);
+	ObjectManager om = new ObjectManager(ds);
 
 	public GamePanel() {
 		frameDraw = new Timer(1000 / 60, this);
@@ -44,7 +45,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
-
+//om.update();
+		//fix
 	}
 
 	void updateEndState() {
@@ -114,12 +116,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			ds.down();
 		}
 
-		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			if (currentState == GAME) {
-				System.out.println("Duck");
-				ds.duck();
-			}
-		}
+		
 	}
 
 	@Override
