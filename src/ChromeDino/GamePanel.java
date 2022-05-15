@@ -20,14 +20,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int END = 2;
 	int currentState = MENU;
 	Timer frameDraw;
-	Font MenuFont = new Font("Arial", Font.PLAIN, 48);
-	Font SubtitleFont = new Font("Arial", Font.PLAIN, 32);
+	Font MenuFont;
+	Font SubtitleFont;
 	Dino ds = new Dino(64, 128, 64, 64);
-	ObjectManager om = new ObjectManager(ds);
+	ObjectManager om;
 
 	public GamePanel() {
+		om = new ObjectManager(ds);
 		frameDraw = new Timer(1000 / 60, this);
 		frameDraw.start();
+		MenuFont = new Font("Arial", Font.PLAIN, 48);
 	}
 
 	public void paintComponent(Graphics g) {
@@ -45,7 +47,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
-//om.update();
+om.update();
 		//fix
 	}
 
@@ -67,6 +69,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.BLUE);
 		g.fillRect(0, 0, ChromeDino.WIDTH, ChromeDino.HEIGHT);
 		ds.draw(g);
+		om.draw(g);
 	}
 
 	void drawEndState(Graphics g) {
