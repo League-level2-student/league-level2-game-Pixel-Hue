@@ -48,7 +48,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateGameState() {
 om.update();
-		//fix
 	}
 
 	void updateEndState() {
@@ -62,13 +61,13 @@ om.update();
 		g.setColor(Color.WHITE);
 		g.drawString("Chrome Dino Game", 80, 160);
 		g.setFont(SubtitleFont);
-		g.drawString("Press Space to Start", 145, 220);
+		g.drawString("Press Space to Start", 75, 220);
 	}
 
 	void drawGameState(Graphics g) {
 		g.setColor(Color.BLUE);
 		g.fillRect(0, 0, ChromeDino.WIDTH, ChromeDino.HEIGHT);
-		ds.draw(g);
+	
 		om.draw(g);
 	}
 

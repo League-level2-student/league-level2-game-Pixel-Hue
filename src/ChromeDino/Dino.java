@@ -6,41 +6,54 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-public class Dino extends GameObject{
-public static BufferedImage Image;
-public static boolean needImage = true;
-public static boolean gotImage = false;
-	Dino(int x, int y, int width, int height) {
+public class Dino extends GameObject {
+	public static BufferedImage Image;
+	public static boolean needImage = true;
+	public static boolean gotImage = false;
+
+	public Dino(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		speed = 64;
 		if (needImage) {
-			loadImage("");
+			loadImage("dino.png");
 		}
 	}
+
 	public void draw(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.fillRect(x, y, width, height);
-		System.out.println(x);
-		System.out.println(width);
-	}
-	void loadImage (String imageFile) {
-		if (needImage) {
-		try {
-			Image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
-			gotImage = true;
-		} catch (Exception e){
-			
-		}
-		needImage = false;
+	
+
+		if (gotImage) {
+			System.out.println("draw");
+			g.drawImage(Image, x, y, 64, 64, null);
+		} else {
+			g.setColor(Color.BLACK);
+			g.fillRect(x, y, width, height);
 		}
 	}
+
 	public void up() {
-		y-=speed;
+		y -= speed;
 	}
+
 	public void down() {
-		y+=speed;
+		y += speed;
 	}
-	public void duck() {
-		y+=speed;
+
+	void loadImage(String imageFile) {
+
+		if (needImage) {
+
+			try {
+				System.out.println("loadiamge");
+				Image = ImageIO.read(this.getClass().getResourceAsStream("dino.png"));
+
+				System.out.println("loadiamge2");
+				gotImage = true;
+
+			} catch (Exception e) {
+
+			}
+			needImage = false;
+		}
 	}
 }

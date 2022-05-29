@@ -27,6 +27,7 @@ public class ObjectManager {
 	}
 
 	void draw(Graphics g) {
+		ds.draw(g);
 		for (int i = 0; i < obstacles.size() - 1; i++) {
 			obstacles.get(i).draw(g);
 		}
