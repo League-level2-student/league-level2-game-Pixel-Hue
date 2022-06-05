@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class Dino extends GameObject {
-	public static BufferedImage Image;
+	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
 
@@ -15,6 +15,7 @@ public class Dino extends GameObject {
 		super(x, y, width, height);
 		speed = 64;
 		if (needImage) {
+			System.out.println("load");
 			loadImage("dino.png");
 		}
 	}
@@ -24,7 +25,7 @@ public class Dino extends GameObject {
 
 		if (gotImage) {
 			System.out.println("draw");
-			g.drawImage(Image, x, y, 64, 64, null);
+			g.drawImage(image, x, y, 60, 64, null);
 		} else {
 			g.setColor(Color.BLACK);
 			g.fillRect(x, y, width, height);
@@ -45,7 +46,7 @@ public class Dino extends GameObject {
 
 			try {
 				System.out.println("loadiamge");
-				Image = ImageIO.read(this.getClass().getResourceAsStream("dino.png"));
+				image = ImageIO.read(this.getClass().getResourceAsStream("dino.png"));
 
 				System.out.println("loadiamge2");
 				gotImage = true;

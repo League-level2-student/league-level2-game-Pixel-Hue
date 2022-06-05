@@ -8,13 +8,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.Timer;
 
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
-
+	public static BufferedImage image;
+	public static boolean needImage = true;
+	public static boolean gotImage = false;
 	final int MENU = 0;
 	final int GAME = 1;
 	final int END = 2;
@@ -65,9 +68,12 @@ om.update();
 	}
 
 	void drawGameState(Graphics g) {
+		if (gotImage) {
+			g.drawImage(image, 0, 0, 500, 800, null);
+		} else {
 		g.setColor(Color.BLUE);
 		g.fillRect(0, 0, ChromeDino.WIDTH, ChromeDino.HEIGHT);
-	
+		}
 		om.draw(g);
 	}
 
