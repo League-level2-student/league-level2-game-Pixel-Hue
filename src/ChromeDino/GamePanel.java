@@ -11,7 +11,7 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.Timer;
-
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
@@ -33,6 +33,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		frameDraw = new Timer(1000 / 60, this);
 		frameDraw.start();
 		MenuFont = new Font("Arial", Font.PLAIN, 48);
+		if (needImage) {
+			loadImage("bg.png");
+		}
 	}
 
 	public void paintComponent(Graphics g) {
@@ -50,7 +53,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
-om.update();
+		om.update();
 	}
 
 	void updateEndState() {
@@ -71,8 +74,8 @@ om.update();
 		if (gotImage) {
 			g.drawImage(image, 0, 0, 500, 800, null);
 		} else {
-		g.setColor(Color.BLUE);
-		g.fillRect(0, 0, ChromeDino.WIDTH, ChromeDino.HEIGHT);
+			g.setColor(Color.BLUE);
+			g.fillRect(0, 0, ChromeDino.WIDTH, ChromeDino.HEIGHT);
 		}
 		om.draw(g);
 	}
@@ -124,7 +127,6 @@ om.update();
 			ds.down();
 		}
 
-		
 	}
 
 	@Override
@@ -137,5 +139,22 @@ om.update();
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	void loadImage(String imageFile) {
+
+		if (needImage) {
+
+			try {
+
+				image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+
+				gotImage = true;
+
+			} catch (Exception e) {
+
+			}
+			needImage = false;
+		}
 	}
 }

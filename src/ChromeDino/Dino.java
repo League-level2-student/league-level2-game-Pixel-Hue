@@ -21,9 +21,9 @@ public class Dino extends GameObject {
 	}
 
 	public void draw(Graphics g) {
-	
 
 		if (gotImage) {
+			System.out.println("gotImage");
 			System.out.println("draw");
 			g.drawImage(image, x, y, 60, 64, null);
 		} else {
@@ -45,10 +45,9 @@ public class Dino extends GameObject {
 		if (needImage) {
 
 			try {
-				System.out.println("loadiamge");
-				image = ImageIO.read(this.getClass().getResourceAsStream("dino.png"));
 
-				System.out.println("loadiamge2");
+				image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+
 				gotImage = true;
 
 			} catch (Exception e) {
