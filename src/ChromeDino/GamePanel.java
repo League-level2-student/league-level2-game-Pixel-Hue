@@ -74,7 +74,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (gotImage) {
 			g.drawImage(image, 0, 0, 500, 800, null);
 		} else {
-			g.setColor(Color.BLUE);
+			g.setColor(Color.GREEN);
 			g.fillRect(0, 0, ChromeDino.WIDTH, ChromeDino.HEIGHT);
 		}
 		om.draw(g);
