@@ -1,6 +1,8 @@
 package ChromeDino;
 
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+
 
 public class GameObject {
 int x;
@@ -21,4 +23,5 @@ public void update() {
 public void draw(Graphics g) {
 	
 }
+
 }

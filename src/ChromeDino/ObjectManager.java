@@ -1,18 +1,22 @@
 package ChromeDino;
 
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ObjectManager {
+public class ObjectManager implements ActionListener{
 	Dino ds;
 	ArrayList<Obstacle> obstacles = new ArrayList();
+	Random ranY;
 
 	public ObjectManager(Dino ds) {
 		this.ds = ds;
 	}
 
 	void addObstacle() {
+		 //make y value be a random number that is an increment of 64
 		obstacles.add(new Obstacle(ChromeDino.WIDTH + 64, new Random().nextInt(ChromeDino.HEIGHT), 64, 64));
 	}
 
@@ -38,6 +42,12 @@ public class ObjectManager {
 			obstacles.remove(i);
 		}
 		}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		addObstacle();
+		
+	}
 	}
 
 

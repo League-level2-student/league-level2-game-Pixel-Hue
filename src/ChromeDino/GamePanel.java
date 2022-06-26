@@ -23,6 +23,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int END = 2;
 	int currentState = MENU;
 	Timer frameDraw;
+	Timer spawnRate;
 	Font MenuFont;
 	Font SubtitleFont;
 	Dino ds = new Dino(64, 128, 64, 64);
@@ -32,6 +33,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		om = new ObjectManager(ds);
 		frameDraw = new Timer(1000 / 60, this);
 		frameDraw.start();
+
 		MenuFont = new Font("Arial", Font.PLAIN, 48);
 		if (needImage) {
 			loadImage("bg.png");
@@ -78,11 +80,22 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			g.fillRect(0, 0, ChromeDino.WIDTH, ChromeDino.HEIGHT);
 		}
 		om.draw(g);
+
 	}
 
 	void drawEndState(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 640, 360);
+		endGame();
+	}
+
+	private void startGame() {
+		spawnRate = new Timer(1000, om);
+		spawnRate.start();
+	}
+
+	private void endGame() {
+		spawnRate.stop();
 	}
 
 	@Override
@@ -112,6 +125,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				System.out.println("st");
 			} else {
 				currentState++;
+			}
+			if (currentState == GAME) {
+				startGame();
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
