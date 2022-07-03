@@ -6,18 +6,20 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ObjectManager implements ActionListener{
+public class ObjectManager implements ActionListener {
 	Dino ds;
+	Obstacle obstacle;
 	ArrayList<Obstacle> obstacles = new ArrayList();
 	Random ranY;
+	GamePanel gp;
 
 	public ObjectManager(Dino ds) {
 		this.ds = ds;
+
 	}
 
 	void addObstacle() {
-		 //make y value be a random number that is an increment of 64
-		obstacles.add(new Obstacle(ChromeDino.WIDTH + 64, new Random().nextInt(ChromeDino.HEIGHT), 64, 64));
+		obstacles.add(new Obstacle(ChromeDino.WIDTH + 64, new Random().nextInt(5) * 64 + 3, 64, 64));
 	}
 
 	void update() {
@@ -28,6 +30,8 @@ public class ObjectManager implements ActionListener{
 				obstacles.get(i).isActive = false;
 			}
 		}
+		//checkColl();
+		//purgeObjects();
 	}
 
 	void draw(Graphics g) {
@@ -37,17 +41,21 @@ public class ObjectManager implements ActionListener{
 		}
 	}
 
-	void purgeObjects() {
-		for (int i = 0; i < obstacles.size() - 1; i++) {
-			obstacles.remove(i);
-		}
-		}
+	//void purgeObjects() {
+	//	for (int i = 0; i < obstacles.size() - 1; i++) {
+	//		obstacles.remove(i);
+	//	}
+	//}
+
+	//void checkColl() {
+	//	if (ds.coll.intersects(obstacle.coll)) {
+	//		// make gamestate end
+	//	}
+	//}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		addObstacle();
-		
-	}
-	}
 
-
+	}
+}
