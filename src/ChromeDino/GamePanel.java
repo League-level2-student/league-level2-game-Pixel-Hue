@@ -56,6 +56,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateGameState() {
 		om.update();
+		if (ds.isActive == false) {
+			System.out.println("run");
+			currentState= END;
+		}
 	}
 
 	void updateEndState() {
@@ -90,6 +94,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	private void startGame() {
+		ds.isActive = true;
 		spawnRate = new Timer(1000, om);
 		spawnRate.start();
 	}

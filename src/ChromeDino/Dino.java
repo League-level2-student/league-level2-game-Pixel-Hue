@@ -15,7 +15,7 @@ public class Dino extends GameObject {
 		super(x, y, width, height);
 		speed = 64;
 		if (needImage) {
-			
+
 			loadImage("dino.png");
 		}
 	}
@@ -23,9 +23,7 @@ public class Dino extends GameObject {
 	public void draw(Graphics g) {
 
 		if (gotImage) {
-			
-			
-			
+
 			g.drawImage(image, x, y, 60, 64, null);
 		} else {
 			g.setColor(Color.BLACK);
@@ -34,11 +32,17 @@ public class Dino extends GameObject {
 	}
 
 	public void up() {
-		y -= speed;
+		if (y>0) {
+			y -= speed;
+		}
+		
 	}
 
 	public void down() {
-		y += speed;
+		if (y<240) {
+			y += speed;
+		}
+		
 	}
 
 	void loadImage(String imageFile) {

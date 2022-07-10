@@ -19,9 +19,23 @@ public class ObjectManager implements ActionListener {
 	}
 
 	void addObstacle() {
-		obstacles.add(new Obstacle(ChromeDino.WIDTH + 64, new Random().nextInt(5) * 64 + 3, 64, 64));
+		obstacles.add(new Obstacle(ChromeDino.WIDTH + 64, new Random().nextInt(5) * 64, 64, 64));
+	}
+	void purgeObjects() {
+		System.out.println("purge");
+		for (int i = 0; i < obstacles.size() - 1; i++) {
+			obstacles.remove(i);
+		} 
 	}
 
+	void checkColl() {
+		for (int i = 0; i < obstacles.size() - 1; i++) {
+			if (ds.coll.intersects(obstacles.get(i).coll)) {
+				ds.isActive = false;
+			}	
+		}
+		
+	}
 	void update() {
 		ds.update();
 		for (int i = 0; i < obstacles.size() - 1; i++) {
@@ -30,8 +44,13 @@ public class ObjectManager implements ActionListener {
 				obstacles.get(i).isActive = false;
 			}
 		}
-		//checkColl();
-		//purgeObjects();
+		if (ds.isActive == true) {
+		checkColl();
+			
+		}
+		if (ds.isActive == false) {
+			purgeObjects();
+		}
 	}
 
 	void draw(Graphics g) {
@@ -41,17 +60,7 @@ public class ObjectManager implements ActionListener {
 		}
 	}
 
-	//void purgeObjects() {
-	//	for (int i = 0; i < obstacles.size() - 1; i++) {
-	//		obstacles.remove(i);
-	//	}
-	//}
-
-	//void checkColl() {
-	//	if (ds.coll.intersects(obstacle.coll)) {
-	//		// make gamestate end
-	//	}
-	//}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
