@@ -14,9 +14,11 @@ public class Dino extends GameObject {
 	public Dino(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		speed = 64;
+	
 		if (needImage) {
 
 			loadImage("dino.png");
+			
 		}
 	}
 

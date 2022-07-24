@@ -13,16 +13,17 @@ public class Obstacle extends GameObject {
 
 	Obstacle(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		speed = 10;
+		speed =10;
 if (needImage) {
 	loadImage("cactus.png");
 }
 	}
 
 	public void update() {
-
+	
 		x -= speed;
-		super.update();
+	speed++;
+			super.update();
 	}
 
 	public void draw(Graphics g) {

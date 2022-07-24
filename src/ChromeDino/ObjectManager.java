@@ -22,10 +22,11 @@ public class ObjectManager implements ActionListener {
 		obstacles.add(new Obstacle(ChromeDino.WIDTH + 64, new Random().nextInt(5) * 64, 64, 64));
 	}
 	void purgeObjects() {
-		System.out.println("purge");
+	
 		for (int i = 0; i < obstacles.size() - 1; i++) {
 			obstacles.remove(i);
 		} 
+	
 	}
 
 	void checkColl() {
@@ -58,6 +59,7 @@ public class ObjectManager implements ActionListener {
 		for (int i = 0; i < obstacles.size() - 1; i++) {
 			obstacles.get(i).draw(g);
 		}
+		
 	}
 
 	
