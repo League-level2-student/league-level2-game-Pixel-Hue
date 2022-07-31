@@ -17,8 +17,11 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static BufferedImage image;
+	public static BufferedImage image2;
 	public static boolean needImage = true;
+	public static boolean needImage2 = true;
 	public static boolean gotImage = false;
+	public static boolean gotImage2 = false;
 	boolean gameStarted = false;
 	final int MENU = 0;
 	final int GAME = 1;
@@ -26,6 +29,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int INSTRUCT = 3;
 	int currentState = MENU;
 	int score = 0;
+	int imnum= 1;
 	Timer frameDraw;
 	Timer spawnRate;
 	Font MenuFont;
@@ -45,7 +49,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		SmallFont = new Font("Arial Rounded MT Bold", Font.BOLD, 24);
 		if (needImage) {
 			loadImage("bg.png");
+			imnum++;
+			loadImage("howToPlay.png");
 		}
+
 	}
 
 	public void paintComponent(Graphics g) {
@@ -55,10 +62,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			drawGameState(g);
 		} else if (currentState == END) {
 			drawEndState(g);
+		} else if (currentState == INSTRUCT) {
+			drawInstructState(g);
 		}
-	else if(currentState==INSTRUCT) {
-		drawInstructState(g);
-	}
 	}
 
 	void updateMenuState() {
@@ -77,6 +83,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void updateEndState() {
 
 	}
+
 	void updateInstructState() {
 
 	}
@@ -123,27 +130,33 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("Press Space to Return to The Main Menu", 60, 270);
 		endGame();
 	}
+
 	void drawInstructState(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 640, 360);
-		g.setFont(TestFont);
-		g.setColor(Color.WHITE);
-		g.drawString("How to play", 50, 40);
-		g.setFont(SmallFont);
-		g.drawString("W to move up", 80, 90);
-		g.drawString("S to move down", 65, 140);
-//replace with pictures of the keys instead
-		g.drawString("Your goal is to survive", 35, 180);
-		g.drawString("and doge cati for as long", 20, 200);
-		g.drawString("as possible", 95, 220);
-	}
+	
+		g.drawImage(image2, 0, 0, 640, 330, null);
+	
+			g.setColor(Color.BLACK);
+			g.fillRect(0, 0, 640, 360);
+			g.setFont(TestFont);
+			g.setColor(Color.WHITE);
+			g.drawString("How to play", 50, 40);
+			g.setFont(SmallFont);
+			g.drawString("W to move up", 80, 90);
+			g.drawString("S to move down", 65, 140);
+//add how to picture
+			g.drawString("Your goal is to survive", 35, 180);
+			g.drawString("and doge cati for as long", 20, 200);
+			g.drawString("as possible", 95, 220);
+		
+		}
+	
 
 	private void startGame() {
 		ds.isActive = true;
 		spawnRate = new Timer(500, om);
 		spawnRate.start();
 		score = 0;
-ds.y =128;
+		ds.y = 128;
 	}
 
 	private void endGame() {
@@ -166,8 +179,7 @@ ds.y =128;
 			updateEndState();
 
 			repaint();
-		}
-		else if (currentState == INSTRUCT) {
+		} else if (currentState == INSTRUCT) {
 			updateEndState();
 
 			repaint();
@@ -190,7 +202,7 @@ ds.y =128;
 			}
 		}
 		if (gameStarted == false && currentState == GAME) {
-		
+
 			startGame();
 			gameStarted = true;
 		}
@@ -198,11 +210,10 @@ ds.y =128;
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			if (currentState == MENU) {
 				currentState = INSTRUCT;
-			}
-			else if (currentState==INSTRUCT) {
+			} else if (currentState == INSTRUCT) {
 				currentState = MENU;
-			} else if (currentState==END) {
-				currentState=MENU;
+			} else if (currentState == END) {
+				currentState = MENU;
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_W) {
@@ -233,15 +244,23 @@ ds.y =128;
 		if (needImage) {
 
 			try {
-
-				image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
-
+if (imnum ==1) {
+	image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+} else if (imnum==2) {
+	image2 = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+}
+			
+				
+				
+				
+				
 				gotImage = true;
 
 			} catch (Exception e) {
 
 			}
 			needImage = false;
+
 		}
 	}
 }
