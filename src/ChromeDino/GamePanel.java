@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int INSTRUCT = 3;
 	int currentState = MENU;
 	int score = 0;
-	int imnum= 1;
+	int imnum = 1;
 	Timer frameDraw;
 	Timer spawnRate;
 	Font MenuFont;
@@ -51,6 +51,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			loadImage("bg.png");
 			imnum++;
 			loadImage("howToPlay.png");
+			imnum++;
+		
 		}
 
 	}
@@ -75,7 +77,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		om.update();
 		if (ds.isActive == false) {
-			System.out.println("run");
 			currentState = END;
 		}
 	}
@@ -93,7 +94,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(0, 0, ChromeDino.WIDTH, ChromeDino.HEIGHT);
 		g.setFont(MenuFont);
 		g.setColor(Color.WHITE);
-		g.drawString("Chrome Dino Game", 80, 140);
+		g.drawString("Chrome Dino 2", 110, 140);
 		g.setFont(SubtitleFont);
 		g.setColor(Color.GREEN);
 		g.drawString("Press ENTER to Start", 55, 200);
@@ -114,6 +115,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(TestFont);
 		g.setColor(Color.WHITE);
 		g.drawString("Score: " + score, 10, 40);
+		
 		score++;
 	}
 
@@ -127,14 +129,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("Press ENTER to play again!", 60, 240);
 		g.setColor(Color.WHITE);
 		g.setFont(SmallFont);
-		g.drawString("Press Space to Return to The Main Menu", 60, 270);
+		g.drawString("PRESS SPACE TO RETURN TO THE MAIN MENU", 30, 270);
 		endGame();
 	}
 
 	void drawInstructState(Graphics g) {
-	
-		g.drawImage(image2, 0, 0, 640, 330, null);
-	
+		if (gotImage2) {
+			g.drawImage(image2, 0, 0, 625, 330, null);
+		} else {
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, 640, 360);
 			g.setFont(TestFont);
@@ -143,13 +145,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			g.setFont(SmallFont);
 			g.drawString("W to move up", 80, 90);
 			g.drawString("S to move down", 65, 140);
-//add how to picture
-			g.drawString("Your goal is to survive", 35, 180);
-			g.drawString("and doge cati for as long", 20, 200);
-			g.drawString("as possible", 95, 220);
-		
+
+			g.drawString("   Your goal is to survive for as", 35, 180);
+			g.drawString(" long as possible for a better score", 20, 200);
+
+			g.drawString("Press space to return", 295, 90);
+			g.drawString("to the main menu", 320, 110);
+
+			g.drawString("To survive you have to dodge cacti", 25, 280);
 		}
-	
+	}
 
 	private void startGame() {
 		ds.isActive = true;
@@ -189,7 +194,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(gameStarted);
+		
 
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentState == END) {
@@ -217,11 +222,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_W) {
-			System.out.println("up");
 			ds.up();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_S) {
-			System.out.println("down");
 			ds.down();
 		}
 
@@ -229,38 +232,30 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	void loadImage(String imageFile) {
 
-		if (needImage) {
-
-			try {
-if (imnum ==1) {
-	image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
-} else if (imnum==2) {
-	image2 = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
-}
-			
-				
-				
-				
-				
-				gotImage = true;
-
-			} catch (Exception e) {
+		try {
+			if (imnum == 1) {
+				image = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
+			} else if (imnum == 2) {
+				image2 = ImageIO.read(this.getClass().getResourceAsStream(imageFile));
 
 			}
-			needImage = false;
+
+			gotImage = true;
+gotImage2=true;
+		} catch (Exception e) {
 
 		}
+		needImage = false;
+
 	}
 }
