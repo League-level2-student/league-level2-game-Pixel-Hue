@@ -23,6 +23,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static boolean gotImage = false;
 	public static boolean gotImage2 = false;
 	boolean gameStarted = false;
+	boolean learnInstruct = false;
 	final int MENU = 0;
 	final int GAME = 1;
 	final int END = 2;
@@ -96,11 +97,27 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.WHITE);
 		g.drawString("Chrome Dino 2", 110, 140);
 		g.setFont(SubtitleFont);
+	
+		
 		g.setColor(Color.GREEN);
-		g.drawString("Press ENTER to Start", 55, 200);
-		g.setColor(Color.WHITE);
+	if (learnInstruct) {
+		g.drawString("Press ENTER to Start", 45, 230);
+	} else {
+		g.setColor(Color.darkGray);
+		g.drawString("Press ENTER to Start", 45, 230);
+	}
+	
+		g.setColor(Color.GREEN);
 		g.setFont(TestFont);
-		g.drawString("Press Space for Instructions", 55, 250);
+		if (learnInstruct) {
+			g.setColor(Color.WHITE);
+			g.drawString("Press Space for Instructions", 45, 180);
+		} else {
+			g.drawString("Press Space for Instructions", 45, 180);
+		}
+	
+
+	
 	}
 
 	void drawGameState(Graphics g) {
@@ -129,11 +146,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("Press ENTER to play again!", 60, 240);
 		g.setColor(Color.WHITE);
 		g.setFont(SmallFont);
-		g.drawString("PRESS SPACE TO RETURN TO THE MAIN MENU", 30, 270);
+		if (learnInstruct) {
+			g.drawString("PRESS SPACE TO RETURN TO THE MAIN MENU", 30, 270);
+		} else {
+			g.drawString("PRESS SPACE TO READ INSTRUCTIONS", 65, 270);
+		}
+		
+		
 		endGame();
 	}
 
 	void drawInstructState(Graphics g) {
+		learnInstruct = true;
 		if (gotImage2) {
 			g.drawImage(image2, 0, 0, 625, 330, null);
 		} else {
